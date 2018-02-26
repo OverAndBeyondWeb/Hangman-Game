@@ -59,7 +59,7 @@ var game = {
     'titans',
     'redskins'
   ],
-  currentGameWord: 'cowboys',
+  currentGameWord: '',
   unsolvedGameWordState: '',
   currentGuessedLetter: '',
   remainingGuesses: 15,
@@ -78,7 +78,7 @@ var game = {
   registerLetterGuess: function() {
 
     var letterSpaces = [].slice.call(document.querySelectorAll('.letter-space')),
-        guessedLetter = document.querySelector('.letters-guessed'),
+        guessedLetter = document.querySelector('.letters-guessed span'),
         numGuessesLeft = document.querySelector('.num-of-guesses');
 
     
@@ -113,22 +113,37 @@ var game = {
     console.log('unsolved', this.unsolvedGameWordState);
   },
   setInitialHTML: function(winsEl, lossesEl, remainingGuessesEl, letterSpacesEl) {
-    winsEl.innerHTML += this.wins;
-    lossesEl.innerHTML += this.losses;
-    remainingGuessesEl.innerHTML += this.remainingGuesses;
+    winsEl.innerHTML = this.wins;
+    lossesEl.innerHTML = this.losses;
+    remainingGuessesEl.innerHTML = this.remainingGuesses;
     this.unsolvedGameWordState.forEach(function(item) {
       letterSpacesEl.innerHTML += '<span class="letter-space">-</span>';
     });
   },
   declareWin: function() {
-    
     wins.textContent = ++this.wins;
     alert('you win');
+    this.resetGame();
   },
   declareLoss: function() {
     
     losses.textContent = ++this.losses;
     alert('you lose');
+    this.resetGame();
+  },
+  resetGame: function() {
+    console.log('reset');
+    this.currentGameWord = '';
+    this.unsolvedGameWordState = '';
+    this.currentGuessedLetter = '';
+    document.querySelector('.letters-guessed span').textContent = '';
+    this.remainingGuesses = 15;
+    this.lettersGuessed = [];
+    this.wordsGuessed = [];
+    this.setCurrentGameWord();
+    this.setUnsolvedGameWordState();
+    word.textContent = '';
+    this.setInitialHTML(wins, losses, remainingGuesses, word);
   }
 }
 
