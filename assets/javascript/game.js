@@ -74,7 +74,7 @@ var game = {
   currentGameWord: '',
   unsolvedGameWordState: '',
   currentGuessedLetter: '',
-  remainingGuesses: 15,
+  remainingGuesses: 5,
   wins: 0,
   losses: 0,
   lettersGuessed: [],
@@ -104,11 +104,12 @@ var game = {
         }
       }  
     } else {
+      numGuessesLeft.innerHTML = --this.remainingGuesses;
       message.textContent = this.wrongGuessPhrases[Math.floor(Math.random() * this.wrongGuessPhrases.length)];
     }
       
     guessedLetter.innerHTML += this.currentGuessedLetter + ', ';
-    numGuessesLeft.innerHTML = --this.remainingGuesses;
+    
 
     if (this.unsolvedGameWordState.indexOf('-') === -1) {
       message.textContent = 'You Win!'
@@ -138,8 +139,11 @@ var game = {
   },
   declareWin: function() {
     wins.textContent = ++this.wins;
-    alert('you win');
-    this.resetGame();
+    var that = this;
+    window.setTimeout(function() {
+      alert('You Win!');
+      that.resetGame();
+    }, 1);
   },
   declareLoss: function() {
     ++this.losses;
@@ -147,7 +151,7 @@ var game = {
 
     var that = this;
     window.setTimeout(function() {
-      alert('you lose');
+      alert('You Lose!');
       that.resetGame();
     }, 1);
   },

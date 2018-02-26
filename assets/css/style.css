@@ -1,8 +1,24 @@
+header {
+  background: url(../images/nflBanner.jpg);
+}
+
 .letter-space{
   display: inline-block;
   width: 25px;
   height: 25px;
-  border-bottom: 1px solid purple;
+  border-bottom: 1px solid rgb(34, 32, 34);
   text-align: center;
   margin-right: 2px;
+}
+
+.copyWrite {
+  width: 100%;
+  color: aqua;
+}
+
+footer {
+  width: 100%;
+  background: url(../images/footballField.jpg);
+  position: fixed;
+  bottom: 0; 
 }
