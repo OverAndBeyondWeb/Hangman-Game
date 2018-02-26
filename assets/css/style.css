@@ -1,0 +1,8 @@
+.letter-space{
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-bottom: 1px solid purple;
+  text-align: center;
+  margin-right: 2px;
+}

@@ -18,7 +18,7 @@ document.onkeyup = function(event) {
 
   //var word = document.querySelector('.word');
   game.setCurrentGuessedLetter(event.key);
-  game.compareGuessedLetterToGameWordLetters();
+  game.registerLetterGuess();
 }
 
 var game = {
@@ -72,10 +72,12 @@ var game = {
     this.lettersGuessed.push(guess);
     console.log(this.lettersGuessed);
   },
-  compareGuessedLetterToGameWordLetters: function() {
+  registerLetterGuess: function() {
     console.log(this.currentGuessedLetter);
     if (this.currentGameWord.indexOf(this.currentGuessedLetter) > -1) {
-      console.log('match');
+      
+      var index = this.currentGameWord.indexOf(this.currentGuessedLetter);
+      console.log('match', 'index: ', index);
     } else {
       console.log('no match');
     }
@@ -93,7 +95,7 @@ var game = {
     lossesEl.innerHTML += this.losses;
     remainingGuessesEl.innerHTML += this.remainingGuesses;
     this.unsolvedGameWordState.forEach(function(item) {
-      letterSpacesEl.innerHTML += item;
+      letterSpacesEl.innerHTML += '<span class="letter-space">-</span>';
     });
   }
 }
