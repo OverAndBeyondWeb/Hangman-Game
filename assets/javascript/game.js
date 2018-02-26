@@ -1,7 +1,17 @@
+
+
+
 window.onload = function() {
+
+  var wins = document.querySelector('.wins'),
+      losses = document.querySelector('.losses'),
+      remainingGuesses = document.querySelector('.remaining-guesses'),
+      word = document.querySelector('.word');
+
   game.setCurrentGameWord();
   console.log(game.currentGameWord);
   game.setUnsolvedGameWordState();
+  game.setInitialHTML(wins, losses, remainingGuesses, word);
 }
 
 document.onkeyup = function(event) {
@@ -49,8 +59,9 @@ var game = {
   currentGameWord: 'cowboys',
   unsolvedGameWordState: '',
   currentGuessedLetter: '',
-  guesses: 15,
-  score: 0,
+  remainingGuesses: 15,
+  wins: 0,
+  losses: 0,
   lettersGuessed: [],
   wordsGuessed: [],
   setCurrentGameWord: function() {
@@ -76,6 +87,14 @@ var game = {
                                                       });
 
     console.log('unsolved', this.unsolvedGameWordState);
-  } 
+  },
+  setInitialHTML: function(winsEl, lossesEl, remainingGuessesEl, letterSpacesEl) {
+    winsEl.innerHTML += this.wins;
+    lossesEl.innerHTML += this.losses;
+    remainingGuessesEl.innerHTML += this.remainingGuesses;
+    this.unsolvedGameWordState.forEach(function(item) {
+      letterSpacesEl.innerHTML += item;
+    });
+  }
 }
 
