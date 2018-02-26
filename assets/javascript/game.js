@@ -59,6 +59,18 @@ var game = {
     'titans',
     'redskins'
   ],
+  wrongGuessPhrases: [
+    'Terrible',
+    'Come on!',
+    'You serious',
+    'That\'s not even a letter, dude'
+  ],
+  rightGuessPrases: [
+    'Nice job!',
+    'You rock!',
+    'You really know your NFL teams',
+    'And another one!'
+  ],
   currentGameWord: '',
   unsolvedGameWordState: '',
   currentGuessedLetter: '',
@@ -79,7 +91,8 @@ var game = {
 
     var letterSpaces = [].slice.call(document.querySelectorAll('.letter-space')),
         guessedLetter = document.querySelector('.letters-guessed span'),
-        numGuessesLeft = document.querySelector('.num-of-guesses');
+        numGuessesLeft = document.querySelector('.num-of-guesses'),
+        message = document.querySelector('.message');
 
     
     if (this.currentGameWord.indexOf(this.currentGuessedLetter) !== -1) {
@@ -87,20 +100,23 @@ var game = {
         if (this.currentGameWord[i] === this.currentGuessedLetter) {
           letterSpaces[+i].innerHTML = this.currentGuessedLetter;
           this.unsolvedGameWordState[+i] = this.currentGuessedLetter;
+          message.textContent = this.rightGuessPrases[Math.floor(Math.random() * this.rightGuessPrases.length)];
         }
       }  
     } else {
-      console.log('no match');
+      message.textContent = this.wrongGuessPhrases[Math.floor(Math.random() * this.wrongGuessPhrases.length)];
     }
       
     guessedLetter.innerHTML += this.currentGuessedLetter + ', ';
     numGuessesLeft.innerHTML = --this.remainingGuesses;
 
     if (this.unsolvedGameWordState.indexOf('-') === -1) {
+      message.textContent = 'You Win!'
       this.declareWin();
     }
 
     if (this.remainingGuesses === 0) {
+      message.textContent = 'You Lose!'
       this.declareLoss();
     }
   },
@@ -126,10 +142,14 @@ var game = {
     this.resetGame();
   },
   declareLoss: function() {
-    
-    losses.textContent = ++this.losses;
-    alert('you lose');
-    this.resetGame();
+    ++this.losses;
+    losses.textContent = this.losses;
+
+    var that = this;
+    window.setTimeout(function() {
+      alert('you lose');
+      that.resetGame();
+    }, 1);
   },
   resetGame: function() {
     console.log('reset');

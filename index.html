@@ -9,33 +9,110 @@
   <title>Document</title>
 </head>
 <body>
-  <header>
-    <div class="container">HANGMAN</div>
+  <header class="text-center bg-primary p-5" style="font-size:28px;font-weight:bold;color:white">
+    HANGMAN
   </header>
-  <h1>Press any key to get started</h1>
+  <main class="container-fluid p-3">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1>Press any key to get started</h1>
+      </div>
+    </div>
 
-  <section class="game-info">
-    <div class="wins">wins: <span></span></div>
-    <div class="losses">losses: <span></span></div>
-    <div class="remaining-guesses">remaining guesses: 
-      <span class="num-of-guesses"></span>
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <h3>Game Info</h3>
+      </div>
+      <div class="col-md-6 text-center">
+        <h3>Stats</h3>
+      </div>
+      <div class="col-md-3 text-center">
+        <h3>Message Board</h3>
+      </div>
     </div>
-    <div class="letters-guessed">letters guessed: 
-      <span></span>
-    </div>
-  </section>
 
-  <section class="game-content">
-    <div class="word">Type a letter to guess a letter: </div>
-    <br>
-    <div class="">
-      <label for="word-guess">Guess a word: </label>
-      <input type="text" id="word-guess" placeholder="guess a word">
-      <br>
-      <br>
-      <button type="submit">Make a Guess!</button>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-3 text-center">
+        <div class="wins">wins: <span></span></div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="losses">losses: <span></span></div>
+      </div>
+      <div class="col-md-3"></div>
     </div>
-  </section>
+
+    <div class="row mt-5">
+      <div class="col-md-3">
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <div class="remaining-guesses">remaining guesses: 
+                <span class="num-of-guesses"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="letters-guessed">letters guessed: 
+                <span></span>
+              </div>
+            </div>
+          </div> 
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="assets/images/hangmanPost.jpg" alt="">
+      </div>
+      <div class="col-md-3">
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <h5>Welcome!</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="message"></div>
+          </div>
+        </div>
+
+
+
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        
+      </div>
+      <div class="col-md-6 text-center pt-5">
+        <div class="word"></div>
+      </div>
+      <div class="col-md-3">
+        
+      </div>
+    </div>
+      
+
+      <section class="game-info">
+        
+        
+        
+        
+      </section>
+    
+      <section class="game-content">
+        
+        <br>
+        <div class="">
+          <label for="word-guess">Guess a word: </label>
+          <input type="text" id="word-guess" placeholder="guess a word">
+          <br>
+          <br>
+          <button type="submit">Make a Guess!</button>
+        </div>
+      </section>
+  </main>
+  
 
   <script src="assets/javascript/game.js"></script>
 </body>
