@@ -5,7 +5,7 @@ window.onload = function() {
 
   var wins = document.querySelector('.wins'),
       losses = document.querySelector('.losses'),
-      remainingGuesses = document.querySelector('.remaining-guesses'),
+      remainingGuesses = document.querySelector('.num-of-guesses'),
       word = document.querySelector('.word');
 
   game.setCurrentGameWord();
@@ -16,9 +16,14 @@ window.onload = function() {
 
 document.onkeyup = function(event) {
 
-  //var word = document.querySelector('.word');
-  game.setCurrentGuessedLetter(event.key);
-  game.registerLetterGuess();
+  if (game.lettersGuessed.indexOf(event.key) > -1) {
+    console.log(this.lettersGuessed, 'you already guessed that letter, don\'t waste a turn');
+  } else {
+    game.setCurrentGuessedLetter(event.key);
+    game.registerLetterGuess();
+  }
+
+  
 }
 
 var game = {
@@ -73,14 +78,26 @@ var game = {
     console.log(this.lettersGuessed);
   },
   registerLetterGuess: function() {
-    console.log(this.currentGuessedLetter);
+
+    var index = this.currentGameWord.indexOf(this.currentGuessedLetter),
+          letterSpaces = document.querySelectorAll('.letter-space'),
+          guessedLetter = document.querySelector('.letters-guessed'),
+          numGuessesLeft = document.querySelector('.num-of-guesses');
+
     if (this.currentGameWord.indexOf(this.currentGuessedLetter) > -1) {
       
-      var index = this.currentGameWord.indexOf(this.currentGuessedLetter);
       console.log('match', 'index: ', index);
+      console.log(letterSpaces);
+
+      letterSpaces[index].innerHTML = this.currentGuessedLetter;
+
     } else {
       console.log('no match');
     }
+
+    guessedLetter.innerHTML += this.currentGuessedLetter + ', ';
+    numGuessesLeft.innerHTML = --this.remainingGuesses;
+    console.log(this.remainingGuesses)
   },
   setUnsolvedGameWordState: function() {
     this.unsolvedGameWordState = this.currentGameWord.split('')
