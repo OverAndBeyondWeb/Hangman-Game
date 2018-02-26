@@ -79,29 +79,32 @@ var game = {
   },
   registerLetterGuess: function() {
 
-    var letterSpaces = document.querySelectorAll('.letter-space'),
+    var letterSpaces = [].slice.call(document.querySelectorAll('.letter-space')),
         guessedLetter = document.querySelector('.letters-guessed'),
         numGuessesLeft = document.querySelector('.num-of-guesses');
 
     
-    console.log('match', 'index: ', index);
-    console.log(letterSpaces);
     if (this.currentGameWord.indexOf(this.currentGuessedLetter) !== -1) {
       for (var i in this.currentGameWord) {
         if (this.currentGameWord[i] === this.currentGuessedLetter) {
           letterSpaces[+i].innerHTML = this.currentGuessedLetter;
+          this.unsolvedGameWordState[+i] = this.currentGuessedLetter;
         }
       }  
     } else {
       console.log('no match');
     }
       
-
-   
-
     guessedLetter.innerHTML += this.currentGuessedLetter + ', ';
     numGuessesLeft.innerHTML = --this.remainingGuesses;
-    console.log(this.remainingGuesses)
+
+    if (this.unsolvedGameWordState.indexOf('-') === -1) {
+      this.declareWin();
+    }
+
+    if (this.remainingGuesses === 0) {
+      this.declareLoss();
+    }
   },
   setUnsolvedGameWordState: function() {
     this.unsolvedGameWordState = this.currentGameWord.split('')
@@ -118,6 +121,12 @@ var game = {
     this.unsolvedGameWordState.forEach(function(item) {
       letterSpacesEl.innerHTML += '<span class="letter-space">-</span>';
     });
+  },
+  declareWin: function() {
+    alert('you win');
+  },
+  declareLoss: function() {
+    alert('you lose');
   }
 }
 
