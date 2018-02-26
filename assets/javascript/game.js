@@ -1,12 +1,10 @@
 
-
+var wins = document.querySelector('.wins span'),
+    losses = document.querySelector('.losses span'),
+    remainingGuesses = document.querySelector('.num-of-guesses'),
+    word = document.querySelector('.word');
 
 window.onload = function() {
-
-  var wins = document.querySelector('.wins'),
-      losses = document.querySelector('.losses'),
-      remainingGuesses = document.querySelector('.num-of-guesses'),
-      word = document.querySelector('.word');
 
   game.setCurrentGameWord();
   console.log(game.currentGameWord);
@@ -123,9 +121,13 @@ var game = {
     });
   },
   declareWin: function() {
+    
+    wins.textContent = ++this.wins;
     alert('you win');
   },
   declareLoss: function() {
+    
+    losses.textContent = ++this.losses;
     alert('you lose');
   }
 }
